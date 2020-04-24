@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Rock-Paper-Scissors</title>
+    <meta name = "description" content = "Rock-Paper-Scissors">
+    <meta name = "author" content = "Peter Silins">
+
+</head>
+
+<body>
+    <script>
+        let compScore = 0;
+        let playScore = 0;
+        let roundsLeft = 5;
+
+        function computerPlay() {
+            let ran = Math.floor(Math.random()*3);  //defines a random whole number between 1-3
+            if (ran === 1) {
+                return "ROCK"
+            }
+            else if (ran === 2) {
+                return "PAPER"
+            }
+            else {
+                return "SCISSORS"
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            let player = playerSelection.toUpperCase();
+
+            if (player === computerSelection) {
+                roundsLeft += 1;
+                return "Tie! Both players made the same play!"
+            } 
+            else {
+                if (computerSelection === "ROCK") {
+                    (player === "PAPER") ? (playScore += 1) : (compScore += 1)
+                    return ((player === "PAPER") ? "You Win! Paper beats Rock!" : "You Lose! Rock beats Scissors");
+                    }
+                else if (computerSelection === "PAPER") {
+                    (player === "SCISSORS") ? (playScore += 1) : (compScore += 1)
+                    return ((player === "SCISSORS") ? "You Win! Scissors beats Paper!" : "You Lose! Paper beats Rock");
+                    }    
+                else {
+                    (player === "ROCK") ? (playScore += 1) : (compScore += 1)
+                    return ((player === "ROCK") ? "You Win! Rock beats Scissors!" : "You Lose! Scissors beats Paper");
+                    }
+            }
+        }
+
+        function game() {
+            
+            while (roundsLeft > 0) {
+                console.log(playRound(prompt("Please choose Rock, Paper or Scissors"), computerPlay()))
+                roundsLeft--;
+            }
+        let winner = (compScore > playScore) ? "Computer" : "Player";
+        console.log("The " + winner + " wins, with a score of " + compScore + " to " + playScore + ".")
+        }
+    </script>
+</body>
+</html>
